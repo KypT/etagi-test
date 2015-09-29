@@ -4,7 +4,7 @@
         return
             "<div class='form-group $class'>
                 <label for='$id'>$label:</label>
-                <input class='form-control' id='$id' required='required' type='$type'/>
+                <input class='form-control' id='$id' name='$attributeName' required='required' type='$type'/>
             </div>";
     }
 ?>
@@ -12,15 +12,9 @@
 <form class="realty form container" action="#" accept-charset="utf-8">
     <h2 class="title"></h2>
 
-    <?// shared properties ?>
-    <div class="shared">
-        <?= field('city',    'Город') ?>
-        <?= field('region',  'Регион') ?>
-        <?= field('street',  'Улица') ?>
-        <?= field('realtor', 'Риэлтор') ?>
-        <?= field('price',   'Цена', 'number') ?>
-        <?= field('owner',   'Владелец') ?>
-    </div>
+    <?= field('city',    'Город') ?>
+    <?= field('region',  'Регион') ?>
+    <?= field('street',  'Улица') ?>
 
     <?// apartments properties ?>
     <div class="apartments properties">
@@ -83,4 +77,13 @@
             <?= field('max_floor',    'Этажность', 'number') ?>
         </div>
     </div>
+
+    <?= field('realtor', 'Риэлтор') ?>
+    <?= field('price',   'Цена', 'number') ?>
+    <?= field('owner',   'Владелец') ?>
+
+    <input type="hidden" name="class"/>
+    <input type="hidden" name="type"/>
+    
+    <button class="btn btn-success submit">Добавить <span class="glyphicon glyphicon-ok"></span></button>
 </form>
