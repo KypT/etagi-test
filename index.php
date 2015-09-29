@@ -1,2 +1,3 @@
 <?php
-    include "pages/_html.php";
+    include "_html.php";
+

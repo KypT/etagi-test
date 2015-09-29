@@ -10,6 +10,9 @@
 <body>
     <div class="container">
         <h1>Hello, Etagi</h1>
+        <table class="table table-striped table-bordered">
+        </table>
+        <? include '_form.php' ?>
     </div>
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
