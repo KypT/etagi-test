@@ -1,14 +1,17 @@
 <?
     function field($attributeName, $label, $type = 'text', $class = '') {
+        $id = uniqid($attributeName);
         return
-            "<div class='field $class'>
-                <label for='#$attributeName'>$label:</label>
-                <input id='#$attributeName' required='required' type='$type'/>
+            "<div class='form-group $class'>
+                <label for='$id'>$label:</label>
+                <input class='form-control' id='$id' required='required' type='$type'/>
             </div>";
     }
 ?>
 
-<form action="#" accept-charset="utf-8">
+<form class="realty form container" action="#" accept-charset="utf-8">
+    <h2 class="title"></h2>
+
     <?// shared properties ?>
     <div class="shared">
         <?= field('city',    'Город') ?>
@@ -29,7 +32,7 @@
         </div>
 
         <div class="apartment">
-            <?= field('living_area', 'Жилая площадь') ?>
+            <?= field('living_area',  'Жилая площадь') ?>
             <?= field('kitchen_area', 'Площадь кухни') ?>
         </div>
 
@@ -75,9 +78,9 @@
     <div class="commercial_property properties">
         <div class="shared">
             <?= field('house_number', 'Номер дома', 'number') ?>
-            <?= field('area', 'Площадь') ?>
-            <?= field('floor', 'Этаж', 'number') ?>
-            <?= field('max_floor', 'Этажность', 'number') ?>
+            <?= field('area',         'Площадь') ?>
+            <?= field('floor',        'Этаж', 'number') ?>
+            <?= field('max_floor',    'Этажность', 'number') ?>
         </div>
     </div>
 </form>
