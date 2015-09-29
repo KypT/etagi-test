@@ -29,6 +29,8 @@ $(function () {
     function showFormFor(klass, type, title) {
         $realtyForm[0].reset();
         $realtyForm.show();
+        $realtyForm.find('input').removeAttr('required');
+        $realtyForm.find('.common input').attr('required', 'true');
         $realtyForm.find('input')[0].focus();
         $realtyForm.find('h2').text(title);
         $realtyForm.find('.properties').hide();
@@ -38,6 +40,7 @@ $(function () {
         var $classProperties = $realtyForm.find('.' + klass + '.properties');
         $classProperties.show();
         $classProperties.find('>*:not(.shared)').hide();
-        $classProperties.find('.' + type).show();
+        $classProperties.find('.shared input').attr('required', 'true');
+        $classProperties.find('.' + type).show().find('input').attr('required', 'true');
     }
 });

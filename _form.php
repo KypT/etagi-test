@@ -4,7 +4,7 @@
         return
             "<div class='form-group $class'>
                 <label for='$id'>$label:</label>
-                <input class='form-control' id='$id' name='$attributeName' required='required' type='$type'/>
+                <input class='form-control' id='$id' name='$attributeName' type='$type'/>
             </div>";
     }
 ?>
@@ -12,9 +12,11 @@
 <form class="realty form container" action="#" accept-charset="utf-8">
     <h2 class="title"></h2>
 
-    <?= field('city',    'Город') ?>
-    <?= field('region',  'Регион') ?>
-    <?= field('street',  'Улица') ?>
+    <div class="common">
+        <?= field('city',    'Город') ?>
+        <?= field('region',  'Регион') ?>
+        <?= field('street',  'Улица') ?>
+    </div>
 
     <?// apartments properties ?>
     <div class="apartments properties">
@@ -54,7 +56,7 @@
         </div>
 
         <div class="countryhouse house cottage">
-            <?= field('area_type_1', 'Площадь дома') ?>
+            <?= field('area_type_2', 'Площадь дома') ?>
         </div>
 
         <div class="countryhouse house cottage townhouse">
@@ -78,12 +80,14 @@
         </div>
     </div>
 
-    <?= field('realtor', 'Риэлтор') ?>
-    <?= field('price',   'Цена', 'number') ?>
-    <?= field('owner',   'Владелец') ?>
+    <div class="common">
+        <?= field('realtor', 'Риэлтор') ?>
+        <?= field('price',   'Цена', 'number') ?>
+        <?= field('owner',   'Владелец') ?>
 
-    <input type="hidden" name="class"/>
-    <input type="hidden" name="type"/>
-    
+        <input type="hidden" name="class"/>
+        <input type="hidden" name="type"/>
+    </div>
+
     <button class="btn btn-success submit">Добавить <span class="glyphicon glyphicon-ok"></span></button>
 </form>
