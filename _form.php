@@ -55,9 +55,12 @@
         <?= field('price',   'Цена',    $realty, 'number') ?>
         <?= field('owner',   'Владелец', $realty) ?>
 
-        <input type="hidden" name="class" class="realty"/>
-        <input type="hidden" name="type" class="realty"/>
+        <div class="<?= $realty ?>">
+            <input type="hidden" name="class"/>
+            <input type="hidden" name="type"/>
+            <input type="hidden" name="id"/>
+        </div>
     </div>
 
-    <button class="btn btn-success submit">Добавить <span class="glyphicon glyphicon-ok"></span></button>
+    <button class="btn btn-success submit">Сохранить <span class="glyphicon glyphicon-ok"></span></button>
 </form>

@@ -6,9 +6,18 @@ class Realty {
 
         foreach (RealtySpecification::attributesFor($type) as $attr)
             if (isset($attributes[$attr]))
-                $result[$attr] = $db->real_escape_string(htmlspecialchars($attributes[$attr]));
+                $result[$attr] = $attributes[$attr];
 
         return $result;
+    }
+
+    static function escapeData($data) {
+        $db = DB::getConnection();
+        $secure = array();
+        foreach($data as $key => $val)
+            $secure[$db->real_escape_string(htmlspecialchars($key))] = $db->real_escape_string(htmlspecialchars($val));
+
+        return $secure;
     }
 
     static function insertQueryFor($class, $type, $id, $attributes) {
@@ -21,8 +30,16 @@ class Realty {
         return $sql.");";
     }
 
+    static function updateQueryFor($class, $type, $attributes) {
+        $sql = "UPDATE $class SET type = '$type' ";
+        foreach(RealtySpecification::attributesFor($type) as $name)
+            $sql .= ", $name = '{$attributes[$name]}'";
+        return $sql;
+    }
+
     public static function create($attr) {
         $db = DB::getConnection();
+        $attr = self::escapeData($attr);
 
         if (count(array_diff(RealtySpecification::sharedAttributes(), array_keys($attr))) > 0)
             exit('Error: not all common properties are presented.');
@@ -35,8 +52,18 @@ class Realty {
         $db->query("INSERT INTO realty(class, city, region, street, realtor, price, owner)
                     VALUES ( '$shared[class]', '$shared[city]', '$shared[region]', '$shared[street]',
                              '$shared[realtor]', $shared[price], '$shared[owner]' )");
+        if ($db->errno) return false;
 
-        $db->query(self::insertQueryFor($shared['class'], $shared['type'], $db->insert_id, $attr));
+        $id = $db->insert_id;
+        $db->query(self::insertQueryFor($shared['class'], $shared['type'], $id, $attr));
+        if ($db->errno) return false;
+        return self::get($id);
+    }
+
+    public static function all() {
+        return array_merge(self::withClass('apartments'),
+                           self::withClass('countryside_apartments'),
+                           self::withClass('commercial_property'));
     }
 
     public static function withClass($class) {
@@ -64,5 +91,44 @@ class Realty {
         }
 
         return $tree;
+    }
+
+    static function classOf($id) {
+        $db = DB::getConnection();
+        return $db->query("SELECT class FROM realty WHERE id = $id;")->fetch_object()->class;
+    }
+
+    public static function get($id) {
+        $db = DB::getConnection();
+        $id = $db->real_escape_string($id);
+        $class = self::classOf($id);
+        return $db->query("SELECT * FROM realty, $class WHERE $class.realty_id = realty.id AND realty.id = $id")->fetch_object();
+    }
+
+    public static function update($data) {
+        $db = DB::getConnection();
+        $attr = self::escapeData($data);
+
+        $shared = self::getAttributesOf('shared', $attr);
+
+        $db->query("UPDATE realty SET city = '$shared[city]', region = '$shared[region]', street = '$shared[street]',
+                                      realtor = '$shared[realtor]', price = '$shared[price]', owner = '$shared[owner]';");
+        if ($db->errno) var_dump($db->error);
+
+        $db->query(self::updateQueryFor($shared['class'], $shared['type'], $attr));
+        if ($db->errno) var_dump($db->error);
+
+        return true;
+    }
+
+    public static function delete($id) {
+        $db = DB::getConnection();
+        $id = $db->real_escape_string($id);
+        $class = self::classOf($id);
+        $db->query("DELETE FROM realty WHERE id = $id");
+        if ($db->errno) return false;
+        $db->query("DELETE FROM $class WHERE realty_id = $id");
+        if ($db->errno) return false;
+        return true;
     }
 }

@@ -1,7 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Kurt
- * Date: 29.09.2015
- * Time: 12:31
- */
+    include "../classes/DB.php";
+    include "../classes/RealtySpecification.php";
+    include "../classes/Realty.php";
+
+    $ok = Realty::delete(htmlspecialchars($_POST['id']));
+    header('Content-Type: application/json');
+    $res = array('deleted' => $ok);
+    echo json_encode($res);
+?>
