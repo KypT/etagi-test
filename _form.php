@@ -1,8 +1,8 @@
 <?
-    function field($attributeName, $label, $type = 'text', $class = '') {
+    function field($attributeName, $label, $class = '', $type = 'text') {
         $id = uniqid($attributeName);
         return
-            "<div class='form-group $class'>
+            "<div class=' col-md-4 form-group $class'>
                 <label for='$id'>$label:</label>
                 <input class='form-control' id='$id' name='$attributeName' type='$type'/>
             </div>";
@@ -11,82 +11,52 @@
 
 <form class="realty form container" action="#" accept-charset="utf-8">
     <h2 class="title"></h2>
+    <?
+        $apartments = 'apartment pension room dormitory ';
+        $countryside_apartments = 'land countryhouse house cottage townhouse ';
+        $commercial_property = 'office store stock ';
+        $realty = $apartments.$countryside_apartments.$commercial_property;
+    ?>
 
-    <div class="common">
-        <?= field('city',    'Город') ?>
-        <?= field('region',  'Регион') ?>
-        <?= field('street',  'Улица') ?>
-    </div>
+    <div class="row">
+        <?// class properties ?>
+        <?= field('city',   'Город',  $realty) ?>
+        <?= field('region', 'Регион', $realty) ?>
+        <?= field('street', 'Улица',  $realty) ?>
 
-    <?// apartments properties ?>
-    <div class="apartments properties">
-        <div class="shared">
-            <?= field('house_number',     'Номер дома', 'number') ?>
-            <?= field('apartment_number', 'Номер квартиры', 'number') ?>
-            <?= field('floor',            'Этаж', 'number') ?>
-            <?= field('max_floor',        'Этажность', 'number') ?>
-        </div>
+        <? // apartments type properties ?>
+        <?= field('house_number',     'Номер дома',     $apartments, 'number') ?>
+        <?= field('apartment_number', 'Номер квартиры', $apartments, 'number') ?>
+        <?= field('floor',            'Этаж',           $apartments, 'number') ?>
+        <?= field('max_floor',        'Этажность',      $apartments, 'number') ?>
 
-        <div class="apartment">
-            <?= field('living_area',  'Жилая площадь') ?>
-            <?= field('kitchen_area', 'Площадь кухни') ?>
-        </div>
+        <?= field('living_area',  'Жилая площадь',   'apartment') ?>
+        <?= field('kitchen_area', 'Площадь кухни',   'apartment') ?>
+        <?= field('area',         'Общая площадь',   'pension dormitory apartment') ?>
+        <?= field('area',         'Площадь комнаты', 'room') ?>
 
-        <div class="pension dormitory apartment">
-            <?= field('area', 'Общая площадь') ?>
-        </div>
+        <?// countryside apartments properties ?>
+        <?= field('number',      'Номер участка',   'land countryhouse', 'number') ?>
+        <?= field('number',      'Номер дома',      'house cottage townhouse', 'number') ?>
+        <?= field('area_type_1', 'Площадь участка', 'land countryhouse house cottage') ?>
+        <?= field('area_type_2', 'Площадь дома',    'countryhouse house cottage') ?>
+        <?= field('max_floor',   'Этажность',       'countryhouse house cottage townhouse', 'number') ?>
+        <?= field('floor',       'Этаж',            'townhouse', 'number') ?>
+        <?= field('area_type_1', 'Общая площадь',   'townhouse') ?>
+        <?= field('area_type_2', 'Жилая площадь',   'townhouse') ?>
 
-        <div class="room">
-            <?= field('area', 'Площадь комнаты') ?>
-        </div>
-    </div>
+        <?// commercial property properties ?>
+        <?= field('number',    'Номер дома', $commercial_property, 'number') ?>
+        <?= field('area',      'Площадь',    $commercial_property) ?>
+        <?= field('floor',     'Этаж',       $commercial_property, 'number') ?>
+        <?= field('max_floor', 'Этажность',  $commercial_property, 'number') ?>
 
-    <?// countryside apartments properties ?>
-    <div class="countryside_apartments properties">
-        <div class="land countryhouse">
-            <?= field('number', 'Номер участка', 'number') ?>
-        </div>
+        <?= field('realtor', 'Риэлтор', $realty) ?>
+        <?= field('price',   'Цена',    $realty, 'number') ?>
+        <?= field('owner',   'Владелец', $realty) ?>
 
-        <div class="house cottage townhouse">
-            <?= field('number', 'Номер дома', 'number') ?>
-        </div>
-
-        <div class="land countryhouse house cottage">
-            <?= field('area_type_1', 'Площадь участка') ?>
-        </div>
-
-        <div class="countryhouse house cottage">
-            <?= field('area_type_2', 'Площадь дома') ?>
-        </div>
-
-        <div class="countryhouse house cottage townhouse">
-            <?= field('max_floor', 'Этажность', 'number') ?>
-        </div>
-
-        <div class="townhouse">
-            <?= field('floor', 'Этаж', 'number') ?>
-            <?= field('area_type_1', 'Общая площадь') ?>
-            <?= field('area_type_2', 'Жилая площадь') ?>
-        </div>
-    </div>
-
-    <?// commercial property properties ?>
-    <div class="commercial_property properties">
-        <div class="shared">
-            <?= field('house_number', 'Номер дома', 'number') ?>
-            <?= field('area',         'Площадь') ?>
-            <?= field('floor',        'Этаж', 'number') ?>
-            <?= field('max_floor',    'Этажность', 'number') ?>
-        </div>
-    </div>
-
-    <div class="common">
-        <?= field('realtor', 'Риэлтор') ?>
-        <?= field('price',   'Цена', 'number') ?>
-        <?= field('owner',   'Владелец') ?>
-
-        <input type="hidden" name="class"/>
-        <input type="hidden" name="type"/>
+        <input type="hidden" name="class" class="realty"/>
+        <input type="hidden" name="type" class="realty"/>
     </div>
 
     <button class="btn btn-success submit">Добавить <span class="glyphicon glyphicon-ok"></span></button>

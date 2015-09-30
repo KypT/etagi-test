@@ -26,7 +26,7 @@
                 <li class="create" data-class="apartments" data-type="pension">Пансионат</li>
                 <li class="create" data-class="apartments" data-type="room">Комнату</li>
                 <li class="create" data-class="apartments" data-type="dormitory">Общежитие</li>
-                <li class="dropdown-header">Загородная надвижимость:</li>
+                <li class="dropdown-header">Загородная недвижимость:</li>
                 <li class="create" data-class="countryside_apartments" data-type="land">Земельный участок</li>
                 <li class="create" data-class="countryside_apartments" data-type="countryhouse">Дачу</li>
                 <li class="create" data-class="countryside_apartments" data-type="house">Дом</li>
@@ -38,6 +38,8 @@
                 <li class="create" data-class="commercial_property" data-type="stock">Складское помещение</li>
             </ul>
         </div>
+
+        <? (new RealtyTableView())->display(Realty::getTree()); ?>
 
         <? include '_form.php' ?>
     </div>
