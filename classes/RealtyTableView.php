@@ -48,7 +48,7 @@ class RealtyTableView {
 
         echo "<tr><th colspan='".(count($spec) + 5)."'><h3>".RealtySpecification::nameFor($type)."</h3></th></tr>";
         echo "<tr>";
-        echo "<th>Адрес</th>";
+        echo "<th>адрес</th>";
         foreach ($spec as $attr) {
             echo "<th>".RealtySpecification::nameFor($type, $attr)."</th>";
         }
