@@ -11,7 +11,8 @@
 
 h2 {
   margin-top: 40px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  text-transform: capitalize; }
 
 table {
   margin-bottom: 0; }
@@ -21,6 +22,7 @@ table {
     padding: 8px 4px !important; }
   table h3 {
     margin-top: 10px;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    text-transform: capitalize; }
 
 /*# sourceMappingURL=index.css.map */
