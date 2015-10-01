@@ -17,6 +17,7 @@ h2 {
 table {
   margin-bottom: 0; }
   table th {
+    text-transform: capitalize;
     border-top: none !important; }
   table th, table td {
     padding: 8px 4px !important; }
