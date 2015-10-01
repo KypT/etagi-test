@@ -34,6 +34,7 @@ class Realty {
         $sql = "UPDATE $class SET type = '$type' ";
         foreach(RealtySpecification::attributesFor($type) as $name)
             $sql .= ", $name = '{$attributes[$name]}'";
+        $sql .= " WHERE realty_id = {$attributes['id']}";
         return $sql;
     }
 
@@ -112,7 +113,8 @@ class Realty {
         $shared = self::getAttributesOf('shared', $attr);
 
         $db->query("UPDATE realty SET city = '$shared[city]', region = '$shared[region]', street = '$shared[street]',
-                                      realtor = '$shared[realtor]', price = '$shared[price]', owner = '$shared[owner]';");
+                                      realtor = '$shared[realtor]', price = '$shared[price]', owner = '$shared[owner]'
+                                  WHERE id = $attr[id];");
         if ($db->errno) var_dump($db->error);
 
         $db->query(self::updateQueryFor($shared['class'], $shared['type'], $attr));

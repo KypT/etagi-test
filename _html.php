@@ -35,6 +35,7 @@
                     <li class="create" data-class="commercial_property" data-type="stock">Складское помещение</li>
                 </ul>
             </div>
+            <a href="/realty/export.php" class="btn btn-primary">Экспорт XML</a>
         </h1>
 
         <? (new RealtyTableView())->display(Realty::getTree()); ?>

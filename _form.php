@@ -9,7 +9,7 @@
     }
 ?>
 
-<form class="realty form container" action="#" accept-charset="utf-8">
+<form class="realty form" action="#" accept-charset="utf-8">
     <h2 class="title"></h2>
     <?
         $apartments = 'apartment pension room dormitory ';
