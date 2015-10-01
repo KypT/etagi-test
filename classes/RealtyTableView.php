@@ -4,11 +4,11 @@ class RealtyTableView {
 
     private function addressOf($realty) {
         if ($realty->class == "apartments")
-            $rest = "$realty->house_number, $realty->apartment_number";
+            $rest = "д. $realty->house_number, кв. $realty->apartment_number";
         else
             $rest = "$realty->number";
 
-        return "$realty->city, $realty->region, $realty->street, ".$rest;
+        return "$realty->region, г. $realty->city, ул. $realty->street, ".$rest;
     }
 
     private function withoudAddress($class, $specs) {
