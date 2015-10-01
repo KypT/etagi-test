@@ -9,4 +9,18 @@
   font-size: 1.2em;
   cursor: default; }
 
+h2 {
+  margin-top: 40px;
+  margin-bottom: 10px; }
+
+table {
+  margin-bottom: 0; }
+  table th {
+    border-top: none !important; }
+  table th, table td {
+    padding: 8px 4px !important; }
+  table h3 {
+    margin-top: 10px;
+    margin-bottom: 0; }
+
 /*# sourceMappingURL=index.css.map */

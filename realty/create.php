@@ -7,8 +7,8 @@
 
     header('Content-Type: application/json');
     if ($realty)
-        $res = array('created' => 'true', 'realty' => $realty);
+        $res = array('created' => true, 'realty' => $realty);
     else
-        $res = array('created' => 'false');
+        $res = array('created' => false);
 
     echo json_encode($res);

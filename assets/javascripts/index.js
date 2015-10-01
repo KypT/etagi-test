@@ -45,10 +45,10 @@ $(function () {
         });
 
         $.post($realtyForm.attr('action'), data, function(res) {
-            if (res.created == 'true') {
+            if (res.created == true) {
                 window.location.reload();
             }
-            else if (res.updated == 'true')
+            else if (res.updated == true)
                 window.location.reload();
         });
         return false;
@@ -81,6 +81,9 @@ $(function () {
     }
 
     function removeRealty(id) {
+        var realty = getRealty(id);
+        if ($('table.' + realty.class).find('tr').length <= 2)
+            location.reload();
         $('tr[data-id=' + id + ']').remove();
     }
 

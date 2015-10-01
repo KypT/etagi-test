@@ -54,9 +54,9 @@ class RealtyTableView {
         }
         echo "<th>Риэлтор</th>";
         echo "<th>Цена</th>";
-        echo "<th width='80px'></th>";
-        echo "<th width='80px'></th>";
-        echo "<tr>";
+        echo "<th width='90px'></th>";
+        echo "<th width='90px'></th>";
+        echo "</tr>";
     }
 
     public function display($tree) {
