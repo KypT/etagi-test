@@ -49,9 +49,9 @@ class RealtySpecification {
         'land' => 'земельные участки',
         'countryhouse' => 'дачи',
         'house' => 'дома',
-        'cottage' => 'коттеджы',
-        'townhouse' => 'таунхаузы',
-        'office' => 'офиссные помещения',
+        'cottage' => 'коттеджи',
+        'townhouse' => 'таунхаусы',
+        'office' => 'офисные помещения',
         'store' => 'торговые помещения',
         'stock' => 'складские помещения',
     );
